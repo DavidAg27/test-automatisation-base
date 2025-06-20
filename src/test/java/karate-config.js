@@ -1,0 +1,23 @@
+function() {
+  var env = karate.env || 'local';// get system property 'karate.env'
+  karate.log('karate.env system property was:', env);
+  if (!env) {
+    env = 'dev';
+  }
+  var config = {
+     baseUrl: 'http://bp-se-test-cabcd9b246a5.herokuapp.com'
+   };
+
+   config.port_marvel_characters_api = 'http://bp-se-test-cabcd9b246a5.herokuapp.com';
+
+   if (env == 'dev') {
+     config.baseUrl = 'http://bp-se-test-cabcd9b246a5.herokuapp.com';
+     config.port_marvel_characters_api = 'http://bp-se-test-cabcd9b246a5.herokuapp.com';
+   }
+   else if (env == 'qa') {
+     config.baseUrl = 'http://bp-se-test-cabcd9b246a5.herokuapp.com';
+     config.port_marvel_characters_api = 'http://bp-se-test-cabcd9b246a5.herokuapp.com';
+   }
+
+   return config;
+ }

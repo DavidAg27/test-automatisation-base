@@ -2,12 +2,12 @@
 Feature: Consultar Personaje de Marvel
 
   Background:
+    * url port_marvel_characters_api
     * configure ssl = true
     * header Content-Type = 'application/json'
 
-    * def setUrlTest = 'http://bp-se-test-cabcd9b246a5.herokuapp.com/fagudelo/api/characters'
 
-  @id:1 @eliminarPersonaje @eliminarExitosa204
+  @id:1 @eliminarPersonajeliminarExitosa204
   Scenario: T-API-BDMNA-0002-CA1-Eliminar personaje
     * def crearPersonaje =
       """
@@ -20,13 +20,13 @@ Feature: Consultar Personaje de Marvel
     * def personaje = call crearPersonaje
     * def personajeId = personaje.id
 
-    * path username, 'api', 'characters', personajeId
+    * path 'fagudelo', 'api', 'characters', personajeId
     When method DELETE
     Then status 204
 
-  @id:2 @eliminarPersonaje @noEncontrado404
+  @id:2 @eliminarPersonaje404 @noEncontrado404
   Scenario: T-API-BDMNA-0002-CA2-Eliminar personaje no existente 404
-    * path username, 'api', 'characters', '9999'
+    * path 'fagudelo', 'api', 'characters', '9999'
     When method DELETE
     Then status 404
     And match response.error == 'Character not found'

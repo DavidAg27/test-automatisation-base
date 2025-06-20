@@ -2,19 +2,21 @@
 Feature: Consultar Personaje de Marvel
 
   Background:
+    * url port_marvel_characters_api
+    * path 'fagudelo', 'api', 'characters'
     * configure ssl = true
     * header Content-Type = 'application/json'
 
     * def setUrlTest = 'http://bp-se-test-cabcd9b246a5.herokuapp.com/fagudelo/api/characters'
 
-  @id:1 @crearPersonaje @CreacionExitosa201
+  @id:1 @crearPersonajeExitosa201
   Scenario: T-API-BDMNA-0001-CA1-Crear personaje exitosamente 201
     And request jsonData
     When method POST
     Then status 201
     And match response != null
 
-  @id:2 @crearPersonaje @nombreDuplicado400
+  @id:2 @crearPersonajeDuplicado400
   Scenario: T-API-BDMNA-0001-CA2-Crear personaje con nombre duplicado 400
     * def jsonData = read('classpath:data/pichincha_test_marvel/create_request.json')
     And request jsonData
@@ -22,7 +24,7 @@ Feature: Consultar Personaje de Marvel
     Then status 400
     And match response.error == 'Character name already exists'
 
-  @id:3 @crearPersonaje @faltanDatosRequeridos400
+  @id:3 @crearPersonajeErrorDatosRequeridos400
   Scenario: T-API-BDMNA-0001-CA3-Crear personaje con datos inválidos 400
     * def jsonData = read('classpath:data/pichincha_test_marvel/empty_request.json')
     And request jsonData

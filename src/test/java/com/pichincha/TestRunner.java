@@ -33,7 +33,7 @@ public class TestRunner {
         ControlsExecutionParallelAgents.featuresSegmentation();
 
         Results results = Runner.path("src/test/java/com/pichincha")
-                .tags("@DMNA-0001-consultarPersonaje").outputCucumberJson(true).parallel(5);
+                .tags("BDMNA-0003-eliminarPersonaje").outputCucumberJson(true).parallel(5);
 
         String karateOutputPath = "build/karate-reports";
         generateReport(karateOutputPath);
@@ -54,7 +54,7 @@ public class TestRunner {
             pathFile.mkdir();
         }
         Files.write(Paths.get(karateResumePath + "/karate.json"), karateJson.toJSONString().getBytes());
-        Configuration config = new Configuration(new File("build"), "Banca Movil");
+        Configuration config = new Configuration(new File("build"), "Test");
         ReportBuilder reportBuilder = new ReportBuilder(jsonPaths, config);
         reportBuilder.generateReports();
     }
